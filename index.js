@@ -32,7 +32,7 @@ app.use(express.urlencoded({extended:true}));
 // app.use(checkifuserisLoggedin());//this calls the function which is wrong
 app.use(checkifuserisLoggedin); //this passes the funtion to be used a s a middleware
 app.use(cors({
-  origin: 'http://localhost:5173',  // 👈 your frontend dev server
+  origin: 'https://web-comic-site-frontend.vercel.app',  // 👈 your frontend dev server
   credentials: true
 }));
 app.use((req, res, next) => {
@@ -42,11 +42,11 @@ app.use((req, res, next) => {
 
 
 app.use('/uploads', express.static(path.resolve('uploads'), {
-  setHeaders: (res, path, stat) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.set('Content-Type', 'application/pdf');  // or auto-detect
+  setHeaders: (res, filePath) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
   }
 }));
+
 
 
 const storage=multer.diskStorage({
