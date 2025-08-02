@@ -6,12 +6,14 @@ const cors=require('cors');
 const mangarouter=require("./routes/manga.js");
 const mymangamodel=require('./model/manga.js');
 const multer=require('multer');
+require("dotenv").config();
 
 const userrouter=require('./routes/user.js')
 const {checkifuserisLoggedin}=require("./middleware/authorization.js");
 
 
 const port=process.env.PORT||8000;
+const mongourl=process.env.MONGO_URL||"mongodb://127.0.0.1:27017/manga_db";
 const app=express();
 
 mongoose.connect('mongodb://127.0.0.1:27017/manga_db')
