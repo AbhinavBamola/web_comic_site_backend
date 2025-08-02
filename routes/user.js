@@ -22,8 +22,8 @@ router.post('/signin',async(req,res)=>{
     const token=await providetoken(user);
     res.cookie("token", token, {
   httpOnly: true,
-  secure: false,         // only false in local dev
-  sameSite: "lax"        // lax works for most dev cases
+  secure: true,         // only false in local dev
+  sameSite: "none"        // lax works for most dev cases
 });
 
     res.json({success:true});
@@ -41,8 +41,8 @@ router.post('/signup',upload.single("profilephoto"),async(req,res)=>{
     const token=await providetoken(user);
     res.cookie("token", token, {
   httpOnly: true,
-  secure: false,         // only false in local dev
-  sameSite: "lax"        // lax works for most dev cases
+  secure: true,         // only false in local dev
+  sameSite: "none"        // lax works for most dev cases
 }
 );
 
@@ -52,8 +52,8 @@ router.post('/signup',upload.single("profilephoto"),async(req,res)=>{
 router.post('/logout',(req,res)=>{
   res.clearCookie("token",{
     httpOnly: true,
-    sameSite: 'lax',   // match with your login cookie settings
-    secure: false      // set to true if using HTTPS
+    sameSite: 'none',   // match with your login cookie settings
+    secure: true      // set to true if using HTTPS
   });
   res.json({success:true});
 })
